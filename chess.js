@@ -14,6 +14,7 @@ canvasBoard.height = HEIGHT;
 
 
 let newBoard = new Board(8,8)
+newBoard.setBoard();
 newBoard.drawBoard();
 
 //helper functions
@@ -31,7 +32,6 @@ window.addEventListener('mousemove',
             let mousePosY = mouse.clientY - rect.top
             let xCell = (mousePosX - (mousePosX%100))/100
             let yCell = (mousePosY - (mousePosY%100))/100
-            console.log(xCell,yCell)
         }
 
     }
@@ -46,7 +46,6 @@ window.addEventListener('mousedown',
             let mousePosY = mouse.clientY - rect.top
             let xCell = (mousePosX - (mousePosX%100))/100
             let yCell = (mousePosY - (mousePosY%100))/100
-            console.log(xCell,yCell)
             newBoard.activate(yCell,xCell)
         }
     } 

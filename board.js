@@ -1,7 +1,6 @@
 class Board{
     constructor(w,h){
         this.gameBoard= []
-        this.active = false
         this.activeTile = [-1,-1]
         for(let i=0;i<w;i++){
             this.gameBoard.push([])
@@ -20,7 +19,7 @@ class Board{
         if (this.active){
             this.gameBoard[this.activeTile[0]][this.activeTile[1]].deactivateTile()
         }
-        this.active = true
+        
         this.activeTile = [y,x]
         this.gameBoard[y][x].activateTile()
         this.gameBoard[y][x].draw()
@@ -33,5 +32,11 @@ class Board{
                 this.gameBoard[i][j].draw();
             }
         }
+    }
+
+    setBoard(){
+        for(let i = 0; i < 8; i++){
+            this.gameBoard[6][i].setPiece(new Pawn("white", 6, i))
+        } 
     }
 }

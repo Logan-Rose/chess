@@ -1,5 +1,5 @@
-class Pawn extends pawn{
-    constructor(color, name, x,y){
+class Pawn extends Piece{
+    constructor(color, x,y){
         super(color,name,x,y)
         if(color == "white"){
             this.available = [
@@ -13,5 +13,7 @@ class Pawn extends pawn{
             ]
 
         }
+        this.image = new Image();
+        this.image.src = 'pawn.png'
     }
 }

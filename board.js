@@ -16,14 +16,21 @@ class Board{
         }
     }
     activate(y,x){
-        if (this.active){
-            this.gameBoard[this.activeTile[0]][this.activeTile[1]].deactivateTile()
+        if(this.activeTile[0] != -1 && this.activeTile[1] != -1){
+            this.gameBoard[this.activeTile[0]][this.activeTile[1]].deactivateTile();
+            this.activeTile = [-1,-1]
+        } else{
+            this.activeTile = [y,x]
+            this.gameBoard[y][x].activateTile()
         }
-        
-        this.activeTile = [y,x]
-        this.gameBoard[y][x].activateTile()
+
         this.gameBoard[y][x].draw()
+
         console.log(this.gameBoard)
+    }
+
+    squareAt(y,x){
+        return this.gameBoard[y][x]
     }
 
     drawBoard(){
@@ -32,11 +39,38 @@ class Board{
                 this.gameBoard[i][j].draw();
             }
         }
+        ctx.save()
     }
+    drawPieces(){
+        for(let i=0;i<8;i++){
+            for(let j=0;j<8;j++){
+                if(this.gameBoard[i][j].isOccupied()){
+                    this.gameBoard[i][j].drawPiece();
+                }
+                if(this.activeTile[0] != -1 && this.activeTile[1] != -1){
+                    this.gameBoard[this.activeTile[0]][this.activeTile[1]].highlight();
+                }
+            }
+        }
+        
+    }
+    drawHighlights(){
+
+    }
+
 
     setBoard(){
         for(let i = 0; i < 8; i++){
             this.gameBoard[6][i].setPiece(new Pawn("white", 6, i))
         } 
+        this.gameBoard[7][2].setPiece(new Knight("white", 7, 2))
+        this.gameBoard[7][5].setPiece(new Knight("white", 7, 5))
+    }
+
+    movePiece(oldx,oldy,newx,newy){
+        this.gameBoard[newy][newx].setPiece(this.gameBoard[oldy][oldx].getPiece())
+        this.gameBoard[oldy][oldx].removePiece();
+        this.gameBoard[oldy][oldx].deactivateTile();
+        this.gameBoard[newy][newx].deactivateTile();
     }
 }

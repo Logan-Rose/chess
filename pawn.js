@@ -3,13 +3,13 @@ class Pawn extends Piece{
         super(color,name,x,y)
         if(color == "white"){
             this.available = [
-                [x-1,y],
-                [x-2,y]
+                [y-1,x],
+                [y-2,x]
             ]
         } else{
             this.available = [
-                [x+1,y],
-                [x+2,y]
+                [y+1,x],
+                [y+2,x]
             ]
 
         }

@@ -36,7 +36,8 @@ window.addEventListener('mousemove',
 
     }
 )
-
+let selectedxCell = -1
+let selectedyCell = -1
 window.addEventListener('mousedown',
     function(mouse){
         var rect = canvasBoard.getBoundingClientRect();
@@ -46,7 +47,35 @@ window.addEventListener('mousedown',
             let mousePosY = mouse.clientY - rect.top
             let xCell = (mousePosX - (mousePosX%100))/100
             let yCell = (mousePosY - (mousePosY%100))/100
-            newBoard.activate(yCell,xCell)
+            console.log(yCell, xCell)
+
+            if(hasChosenCell() && !(selectedxCell == xCell && selectedyCell == yCell ) ){
+                console.log(selectedxCell, xCell)
+                newBoard.movePiece(selectedxCell,selectedyCell,xCell,yCell)
+                newBoard.activate(selectedyCell,selectedxCell)
+                selectedxCell = -1
+                selectedyCell = -1
+            }else if(newBoard.squareAt(yCell,xCell).isOccupied()){
+                newBoard.activate(yCell,xCell)
+                selectedxCell = xCell
+                selectedyCell = yCell
+            }
+            
         }
     } 
-)
+);
+
+function hasChosenCell(){
+    return (selectedxCell != -1 && selectedyCell != -1);
+}
+
+
+function animate(){
+    requestAnimationFrame(animate);
+    ctx.restore();
+    newBoard.drawPieces();
+    newBoard.drawHighlights();
+
+}
+
+animate();

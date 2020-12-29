@@ -6,4 +6,10 @@ class Piece{
         this.y = y
         this.available = []
     }
+    setX(val){
+        this.x = val
+    }
+    setY(val){
+        this.y = val
+    }
 }

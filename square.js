@@ -10,18 +10,19 @@ class Square{
     draw(){
         ctx.fillStyle = this.color;
         ctx.fillRect(this.y*100,this.x*100, 100, 100);
-        this.drawPiece();
     }
 
-    drawPiece(){
+    highlight(){
         if (this.active){
             ctx.beginPath();
             ctx.lineWidth = "4";
             ctx.rect(this.y*100+4,this.x*100+4, 92,92);
             ctx.strokeStyle = "black";
             ctx.stroke();
-            console.log("active")
         }
+    }
+
+    drawPiece(){
         if (this.occupied){
             let tmp = this.piece
             this.piece.image.onload = function(){
@@ -29,6 +30,9 @@ class Square{
             }
             ctx.drawImage(tmp.image, tmp.y*100,tmp.x*100, 100, 100); 
         }
+    }
+    getPiece(){
+        return this.piece
     }
 
     activateTile(){
@@ -44,5 +48,11 @@ class Square{
     setPiece(piece){
         this.occupied = true
         this.piece = piece
+        this.piece.setX(this.x)
+        this.piece.setY(this.y)
+    }
+    removePiece(){
+        this.occupied = false
+        this.piece = null
     }
 }

@@ -13,13 +13,11 @@ class Square{
     }
 
     highlight(){
-        if (this.active){
             ctx.beginPath();
             ctx.lineWidth = "4";
             ctx.rect(this.y*100+4,this.x*100+4, 92,92);
             ctx.strokeStyle = "black";
             ctx.stroke();
-        }
     }
 
     drawPiece(){
@@ -48,8 +46,7 @@ class Square{
     setPiece(piece){
         this.occupied = true
         this.piece = piece
-        this.piece.setX(this.x)
-        this.piece.setY(this.y)
+        this.piece.movePiece(this.y, this.x);
     }
     removePiece(){
         this.occupied = false

@@ -3,6 +3,7 @@ let ctx = canvasBoard.getContext('2d');
 let styles = getComputedStyle(canvasBoard),
 w = parseInt(styles.getPropertyValue("width"), 10),
 h = parseInt(styles.getPropertyValue("height"), 10);
+console.log(w)
 let frame;
 let WIDTH = w;
 let HEIGHT = h;
@@ -15,7 +16,6 @@ canvasBoard.height = HEIGHT;
 
 let newBoard = new Board(8,8)
 newBoard.setBoard();
-newBoard.drawBoard();
 
 //helper functions
 function onBoard(mouse, rect){
@@ -55,7 +55,12 @@ window.addEventListener('mousedown',
                 newBoard.activate(selectedyCell,selectedxCell)
                 selectedxCell = -1
                 selectedyCell = -1
-            }else if(newBoard.squareAt(yCell,xCell).isOccupied()){
+            }else if(selectedxCell == xCell && selectedyCell == yCell){
+                console.log("fuuuck")
+                newBoard.activate(yCell,xCell)
+                selectedxCell = -1
+                selectedyCell = -1
+            } else if(newBoard.squareAt(yCell,xCell).isOccupied()){
                 newBoard.activate(yCell,xCell)
                 selectedxCell = xCell
                 selectedyCell = yCell
@@ -72,9 +77,9 @@ function hasChosenCell(){
 
 function animate(){
     requestAnimationFrame(animate);
-    ctx.restore();
+    ctx.clearRect(0,0,w,h);
+    newBoard.drawBoard();
     newBoard.drawPieces();
-    newBoard.drawHighlights();
 
 }
 

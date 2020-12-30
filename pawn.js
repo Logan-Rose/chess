@@ -7,12 +7,7 @@ class Pawn extends Piece{
         } else{
             this.direction = 1
         }
-
-        this.available = [
-            [this.x + 2*this.direction,this.y],
-            [this.x-1*this.direction,this.y]
-        ]
-        this.confirmAvailable()
+        this.updateAvailable()
         this.moved = false
         this.image = new Image();
         this.image.src = 'pawn.png';
@@ -31,7 +26,6 @@ class Pawn extends Piece{
             ]
         }
         this.confirmAvailable()
-        console.log(this.available)
     }
 
 

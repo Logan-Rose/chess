@@ -48,10 +48,7 @@ class Board{
                 if(this.activeTile.length > 0){
                     this.gameBoard[this.activeTile[0]][this.activeTile[1]].highlight();
                     let available = this.gameBoard[this.activeTile[0]][this.activeTile[1]].getPiece().getAvailable()
-                    console.log("bitch:", available)
-                    for(let i =0; i< available.length;i++){
-                        console.log(available[i][0])
-                        
+                    for(let i =0; i< available.length;i++){                        
                         this.gameBoard[available[i][0]][available[i][1]].highlight();
                     }
                 }

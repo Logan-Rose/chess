@@ -20,6 +20,7 @@ class Piece{
     updateAvailable(){};
 
     getAvailable(){
+        this.confirmAvailable()
         return this.available
     }
 
